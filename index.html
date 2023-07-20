@@ -11,14 +11,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
 </head>
 <body class="main-content">
-    <header class="section sec1 header active">
-
+    <header class="section sec1 header active" id="about">
+        <div class="header-content">
+            <div class="left-header">
+                <div class="h-shape"></div>
+                <div class="profile-img">
+                    <img src="/images/profile_img.jpg" alt="Profile Image" height="350">
+                </div>
+            </div>
+            <div class="right-header">
+                <h1 class="intro">
+                    Hello
+                </h1>
+                <p>
+                    Hello, here's an intro
+                </p>
+            </div>
+        </div>
     </header>
 
     <main>
-        <section class="section sec2 about"> </section>
-        <section class="section sec3 research"> </section>
-        <section class="section sec4 projects"> </section>
+        <section class="section sec2 research" id="research"></section>
+        <section class="section sec3 projects" id="projects"></section>
     </main>
 
     <div class="menu">
@@ -32,5 +46,7 @@
             <i class="fa-solid fa-bars-progress"></i>
         </div>
     </div>
+
+    <script src="app.js"></script>
 </body>
 </html>

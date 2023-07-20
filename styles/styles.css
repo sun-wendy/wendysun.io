@@ -65,9 +65,8 @@ section {
   transform: translateY(0) scale(1);
 }
 
-.sec4 {
-  display: none;
-  transform: translateY(0) scale(1);
+.active {
+  display: block;
 }
 
 .menu {
