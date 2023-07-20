@@ -174,10 +174,10 @@ section {
   border-radius: 15px;
 }
 .projects-page .project-item img {
-  width: 60%;
+  width: 100%;
   height: 300px;
-  -o-object-fit: contain;
-     object-fit: contain;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 15px;
 }
 .projects-page .project-item .hover-items {
@@ -192,6 +192,9 @@ section {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease-in-out;
 }
 .projects-page .project-item .hover-items h3 {
   font-size: 1.5rem;
@@ -225,6 +228,11 @@ section {
 }
 .projects-page .project-item .hover-items .icons .icon:hover i {
   color: var(--color-white);
+}
+
+.project-item:hover .hover-items {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Independent components */
