@@ -28,9 +28,16 @@ function pageTransitions(){
                 section.classList.remove('active');
             })
 
-            const element = document.getElementById(id);
-            element.classList.add('active');
+            const elem = document.getElementById(id);
+            elem.classList.add('active');
         }
+    })
+
+    // Switch light / dark mode
+    const themeBtn = document.querySelector('.theme-btn');
+    themeBtn.addEventListener('click', () => {
+        let elem = document.body;
+        elem.classList.toggle('dark-mode');
     })
 }
 
