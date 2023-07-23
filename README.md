@@ -1,2 +1,2 @@
 # wendysun.io
-My static personal website
+[My static personal website](wendysun.io)
