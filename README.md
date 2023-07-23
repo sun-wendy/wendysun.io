@@ -1,2 +1,2 @@
 # wendysun.io
-[My static personal website](https://wendysun.io/)
+<a href="https://wendysun.io/" target="_blank">My static personal website</a>
