@@ -15,7 +15,7 @@
 }
 
 .dark-mode{
-    --color-white: #000;
+    --color-white: #18191a;
     --color-black: #fff;
     --color-grey: #ccc;
     --color-lightblue: #63e5ff;
@@ -186,6 +186,35 @@ section{
         p{
             margin: 1.5rem 0;
             line-height: 2rem;
+            u{
+                text-decoration-color: var(--color-lightblue);
+            }
+        }
+        .contact-icons{
+            display: flex;
+            margin-top: 2rem;
+            margin-left: -0.8rem;
+            a{
+                display: flex;
+                align-items: center;
+                color: var(--color-black);
+                background-color: var(--color-white);
+                cursor: pointer;
+                justify-content: center;
+                margin: 0 1rem;
+                transition: all 0.3s ease-in-out;
+                &:hover{
+                    i{
+                        color: var(--color-lightblue);
+                    }
+                }
+                i{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 2rem;
+                }
+            }
         }
     }
 }
