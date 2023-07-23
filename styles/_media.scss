@@ -1,0 +1,122 @@
+@media screen and (max-width: 600px){
+    header{
+        padding: 0;
+        overflow: scroll;
+    }
+
+    header .right-header{
+        padding: 2rem !important;
+    }
+
+    .theme-btn{
+        width: 50px;
+        height: 50px;
+    }
+
+    .header-content{
+        grid-template-columns: 1fr;
+        padding-bottom: 6rem;
+    }
+
+    .right-header{
+        grid-row: 1;
+        width: 90%;
+        margin: 0 auto;
+        .intro{
+            font-size: 2.5rem !important;
+        }
+    }
+
+    .header-content .left-header .profile-img{
+        margin: 0 auto;
+        width: 80%;
+    }
+
+    .section{
+        padding: 2rem 2.5rem;
+    }
+
+    .main-title{
+        h2{
+            font-size: 2rem;
+        }
+    }
+
+    .projects{
+        grid-template-columns: 1fr;
+        padding-bottom: 6rem;
+    }
+
+    .menu{
+        top: auto;
+        bottom: 0;
+        flex-direction: row;
+        justify-content: center;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        background-color: var(--color-black);
+        .control{
+            margin: 1rem 0.3rem;
+        }
+    }
+}
+
+@media screen and (max-width: 1070px){
+    .projects{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 970px){
+    header{
+        padding: 0;
+        overflow: scroll;
+    }
+
+    header .right-header{
+        padding: 2rem !important;
+    }
+
+    .theme-btn{
+        width: 50px;
+        height: 50px;
+    }
+
+    .header-content{
+        grid-template-columns: 1fr;
+        padding-bottom: 6rem;
+    }
+
+    .right-header{
+        grid-row: 1;
+        width: 90%;
+        margin: 0 auto;
+        .intro{
+            font-size: 2.5rem !important;
+        }
+    }
+
+    .header-content .left-header .profile-img{
+        margin: 0 auto;
+        width: 80%;
+    }
+
+    .section{
+        padding: 7rem 6rem;
+    }
+
+    .menu{
+        top: auto;
+        bottom: 0;
+        flex-direction: row;
+        justify-content: center;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        background-color: var(--color-black);
+        .control{
+            margin: 1rem 0.3rem;
+        }
+    }
+}
