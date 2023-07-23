@@ -42,7 +42,7 @@
         }
     }
 
-    .projects{
+    .projects-page{
         grid-template-columns: 1fr;
         padding-bottom: 6rem;
     }
@@ -63,7 +63,7 @@
 }
 
 @media screen and (max-width: 1070px){
-    .projects{
+    .projects-page{
         grid-template-columns: 1fr 1fr;
     }
 }

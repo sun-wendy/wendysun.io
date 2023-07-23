@@ -305,6 +305,17 @@ section{
     transform: scale(1);
 }
 
+.project-title{
+    font-size: 2rem;
+    padding: 2rem 0;
+    text-align: left;
+}
+
+.project-description{
+    padding: 2rem 0;
+    text-align: left;
+}
+
 /* Independent components */
 .btn-container{
     display: flex;

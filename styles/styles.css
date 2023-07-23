@@ -302,6 +302,17 @@ section {
   transform: scale(1);
 }
 
+.project-title {
+  font-size: 2rem;
+  padding: 2rem 0;
+  text-align: left;
+}
+
+.project-description {
+  padding: 2rem 0;
+  text-align: left;
+}
+
 /* Independent components */
 .btn-container {
   display: flex;
@@ -394,7 +405,7 @@ section {
   .main-title h2 {
     font-size: 2rem;
   }
-  .projects {
+  .projects-page {
     grid-template-columns: 1fr;
     padding-bottom: 6rem;
   }
@@ -413,7 +424,7 @@ section {
   }
 }
 @media screen and (max-width: 1070px) {
-  .projects {
+  .projects-page {
     grid-template-columns: 1fr 1fr;
   }
 }
