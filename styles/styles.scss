@@ -243,13 +243,13 @@ section{
         position: relative;
         border-radius: 15px;
         img{
-            width: 100%;
+            width: 135%;
             height: 300px;
             object-fit: cover;
             border-radius: 15px;
         }
         .hover-items{
-            width: 100%;
+            width: 135%;
             height: 100%;
             background-color: var(--color-grey);
             position: absolute;
@@ -275,8 +275,8 @@ section{
                 .icon{
                     background-color: var(--color-white);
                     border-radius: 50%;
-                    width: 50px;
-                    height: 50px;
+                    width: 60px;
+                    height: 60px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -284,14 +284,14 @@ section{
                     cursor: pointer;
                     transition: all 0.2s ease-in-out;
                     i{
-                        font-size: 1.5rem;
+                        font-size: 2rem;
                         color: var(--color-black);
                         margin: 0 1rem;
                     }
                     &:hover{
-                        background-color: var(--color-black);
+                        background-color: var(--color-lightblue);
                         i{
-                            color: var(--color-white);
+                            color: var(--color-black);
                         }
                     }
                 }
@@ -314,6 +314,12 @@ section{
 .project-description{
     padding: 2rem 0;
     text-align: left;
+}
+
+.project-img{
+    display: block;
+    width: 800px;
+    margin: 2rem auto;
 }
 
 /* Independent components */

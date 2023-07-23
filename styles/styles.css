@@ -241,14 +241,14 @@ section {
   border-radius: 15px;
 }
 .projects-page .project-item img {
-  width: 100%;
+  width: 135%;
   height: 300px;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 15px;
 }
 .projects-page .project-item .hover-items {
-  width: 100%;
+  width: 135%;
   height: 100%;
   background-color: var(--color-grey);
   position: absolute;
@@ -276,8 +276,8 @@ section {
 .projects-page .project-item .hover-items .icons .icon {
   background-color: var(--color-white);
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -286,15 +286,15 @@ section {
   transition: all 0.2s ease-in-out;
 }
 .projects-page .project-item .hover-items .icons .icon i {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: var(--color-black);
   margin: 0 1rem;
 }
 .projects-page .project-item .hover-items .icons .icon:hover {
-  background-color: var(--color-black);
+  background-color: var(--color-lightblue);
 }
 .projects-page .project-item .hover-items .icons .icon:hover i {
-  color: var(--color-white);
+  color: var(--color-black);
 }
 
 .project-item:hover .hover-items {
@@ -311,6 +311,12 @@ section {
 .project-description {
   padding: 2rem 0;
   text-align: left;
+}
+
+.project-img {
+  display: block;
+  width: 800px;
+  margin: 2rem auto;
 }
 
 /* Independent components */
