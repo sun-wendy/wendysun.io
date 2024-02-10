@@ -190,6 +190,7 @@ section {
   padding-right: 18rem;
 }
 .header-content .right-header .intro {
+  margin-bottom: 1rem;
   font-size: 3rem;
 }
 .header-content .right-header .intro span {
@@ -227,7 +228,15 @@ section {
   font-size: 2rem;
 }
 
-.projects-text {
+.research-page p {
+  margin: 2.5rem 0;
+  line-height: 2rem;
+}
+.research-page p u {
+  text-decoration-color: var(--color-lightblue);
+}
+
+.page-description {
   padding: 2rem 0;
   text-align: center;
 }
@@ -235,7 +244,7 @@ section {
 .projects-page {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2rem;
+  grid-gap: 1rem;
   margin-top: 3rem;
 }
 .projects-page .project-item {

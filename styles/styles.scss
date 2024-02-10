@@ -189,6 +189,7 @@ section{
         justify-content: center;
         padding-right: 18rem;
         .intro{
+            margin-bottom: 1rem;
             font-size: 3rem;
             span{
                 color: var(--color-lightblue);
@@ -230,8 +231,19 @@ section{
     }
 }
 
-// Projects
-.projects-text{
+// Research page
+.research-page{
+    p{
+        margin: 2.5rem 0;
+        line-height: 2rem;
+        u{
+            text-decoration-color: var(--color-lightblue);
+        }
+    }
+}
+
+// Projects page
+.page-description{
     padding: 2rem 0;
     text-align: center;
 }
@@ -239,7 +251,7 @@ section{
 .projects-page{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 2rem;
+    grid-gap: 1rem;
     margin-top: 3rem;
     .project-item{
         position: relative;
