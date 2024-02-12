@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Personal Website | Wendy Sun</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js" integrity="sha384-483A6DwYfKeDa0Q52fJmxFXkcPCFfnXMoXblOkJ4JcA8zATN6Tm78UNL72AKk+0O" crossorigin="anonymous"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/contrib/auto-render.min.js" integrity="sha384-yACMu8JWxKzSp/C1YV86pzGiQ/l1YUfE8oPuahJQxzehAjEt2GiQuy/BIvl9KyeF" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+<body class="main-content">
+    <main>
+        <section class="section sec3 projects active" id="single-project">
+            <div class="project-title"><b>
+                Non-Uniform Rational B-Splines Editing Tool
+            </b></div>
+
+            <p class="project-description">
+                For the final project for my Computer Graphics class in fall 2023, my teammate and I built an user friendly editing tool to work with <b><u>non-uniform B-splines (NURBS) curves & surfaces</u></b>.
+                NURBS is widely used in real-world applications such as modeling, and our editing tool allows users to conveniently render curves or surfaces they want with NURBS.
+            </p>
+
+            <iframe class="project-img" width="560" height="400" src="https://www.youtube.com/embed/8CIBrUmqSFM?si=xee1RNlL7yp8BDez" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <br>
+
+            <h2>Motivation</h2>
+            <p class="project-description">
+                We chose to work with NURBS because of its wide applicability, from both the theoretical and practical aspects. <br><br>
+                On the theoretical side, NURBS provides a mathematical basis for representing both analytic shapes and free-form entities [5].
+                Moreover, the local-control feature of NURBS makes it geometrically intuitive to design with NURBS (adding / removing a control point only changes the local shape), enabling local editing of the curve shape.
+                NURBS curves and surfaces are invariant under common transformations. Lastly, in terms of performance, NURBS algorithms are fast and numerically stable. <br><br>
+                On the practical side, NURBS is very popular for CAD, visualizations, industry modeling, etc.
+            </p>
+
+            <h2>Background</h2>
+            <p class="project-description">
+                The framework of this project was built on top of an assignment on Bezier & B-splines.
+                NURBS is a generalization of Bezier and B-splines, as it weights control points and has rational curves.
+                In particular, it has the extra parameters of weights and non-uniform knots, which are not present in default Bezier or B-splines. <br><br>
+                Most of our computations and algorithms are based on <em>The NURBS Book</em> by Piegl and Tiller [5], which covers this topic in extensive details.
+                In addition, since one special aspect of NURBS is that it can draw a perfect circle as well as sphere (whereas non-rational Bezier can only give approximations), we referred to "Representing a Circle or a Sphere with NURBS" by Eberly [1] for building our procedural code to draw a sphere. <br><br>
+                To double-check that our curves and surfaces are correct, we used an online NURBS calculator [4].
+            </p>
+
+            <h2>Approach</h2>
+            <p class="project-description">
+                In this section, we lay out how we go from the math formulas of NURBS to implementation in C++.
+
+                <h4>NURBS Curve</h4>
+                <p>
+                    A <em>p</em>th degree NURBS curve is defined as [5]: <br><br>
+                    <center>\(C(u) \, = \, \frac{\sum_{\, i=0}^{\, n} \, N_{i,p}(u) \cdot w_{i} \cdot P_{i}}{\sum_{\, i=0}^{\, n} \, N_{i,p}(u) \cdot w_{i}} \, \begin{matrix} \\,\\ \end{matrix} \hspace{1cm} a \leq u \leq b,\)</center> <br>
+                    where \(N_{i,p}(u)\) is the \(i\)th basis function of degree \(p\), \(w_{i}\) is the weight of the \(i\)th control point, and \(P_{i}\) is the \(i\)th control point. <br><br>
+                    where \($\{P_{i}\}$\) are control points, \($\{w_{i}\}$\) are weights, \($\{N_{i,p}(u)\}$\) are the \($p$\)th degree B-spline basis functions defined on the non-periodic and non-uniform knot vector (clamped endpoints here):
+                    <center>\(U \, = \, \{a, \, \cdots, \, a, \, u_{p+1}, \, \cdots, \, u_{m-p-1}, \, b, \, \cdots, \, b\}, \hspace{1cm} \text{where } a = 0, \, b = 1.\)</center> <br><br>
+                    To calculate the B-spline basis function $N_{i,p}(u)$ given any knot vector $U$ and degree, we used a dynamic programming tabular method derived from the Cox-deBoor recurrence formula: <br><br>
+                    \(N_{i, 0}(u) \, = \begin{cases} 1 & \text{if } u_{i} \leq u < u_{i+1} \\ 0 & \text{otherwise} \end{cases}\) <br><br>
+                    \(N_{i, p}(u) \, = \, \frac{u - u_{i}}{u_{i+p} - u_{i}} \, N_{i, \, p-1}(u) \, + \, \frac{u_{i+p+1} - u}{u_{i+p+1} - u_{i+1}} \, N_{i+1, \, p-1}(u).\)
+                </p>
+
+                <h4>NURBS Surface</h4>
+                <p>
+                    A NURBS surface is defined by a control points net, which form NURBS curves in $u$- and $v$-directions. A NURBS surface of degree $p$ in $u$-direction and degree $q$ in $v$-direction is defined as \cite{nurbsbook}: <br><br>
+                    \(S(u, v) \, = \, \frac{\sum_{\, i=0}^{\, n} \sum_{\, j=0}^{\, m} \, N_{i,p}(u) \, \cdot \, N_{j,q}(v) \, \cdot \, w_{i,j} \, \cdot \, P_{i,j}}{\sum_{\, i=0}^{\, n} \sum_{\, j=0}^{\, m} \, N_{i,p}(u) \, \cdot \, N_{j,q}(v) \, \cdot \, w_{i,j}} \, \begin{matrix} \\,\\ \end{matrix} \hspace{1cm} 0 \, \leq \, u, \, v \, \leq \, 1,\) <br><br>
+                    where the notations are similar to those in Equation (1), except that the surface is in $uv$-coordinates. <br><br>
+                    The surface points were able to be implemented by building on top of our curve implementation. However, we also needed to calculate the surface normals for shading. At a high level, the surface normals are the normalized cross product of the partial derivatives with respect to $u$ and $v$: <br><br>
+                    \(\frac{\frac{\partial S(u,v)}{\partial u} \times \frac{\partial S(u,v)}{\partial v}}{|\frac{\partial S(u,v)}{\partial u} \times \frac{\partial S(u,v)}{\partial v} |}  \, = \, \frac{(S^{(1,0)} \times S^{(0,1)})}{|(S^{(1,0)} \times S^{(0,1)})|} \, \begin{matrix} \\,\\ \end{matrix}\) <br><br>
+                    where $S^{(k,l)}(u,v)$ is the (\textit{k}th, \textit{l}th) partial derivative of a NURBS surface at point \textit{S(u, v)} with respect to the variables $(u, v)$, which can be derived using the Leibniz rule (the product rule for finding higher order derivatives): <br><br>
+                    \(S^{(k,l)} \, = \, \frac{1}{w^{(0,0)}} \, (A^{(k,l)} \, - \, \sum_{\, i=1}^{\,k} \binom{k}{i} \, w^{(i,0)} \, S^{(k-i, \, l)} - \sum_{\, j=1}^{\,l} \binom{l}{j} \, w^{(0,j)} \, S^{(k, \, l-j)} \, - \, \sum_{\, i=1}^{\,k} \binom{k}{i} \sum_{\, j=1}^{\,l} \binom{l}{j} \, w^{(i,j)} \, S^{(k-i, \, l-j)}) \, ,\) <br><br>
+                    where $A^{(k,l)}$ and $w^{(i,j)}$ are found through the following steps: <br><br>
+                    
+                    <ol>
+                        <li>Find the correct knot vector span index \emph{i} that encompasses $u$ in knot vector $U$ using binary search. Do the same for $v$ in knot vector $V$.</li>
+                        <li>Compute the derivatives of the degree $p$ ($p = p$ for $u$-direction, $p = q$ for $v$-direction) B-spline basis functions:
+                            \(N^{(k)}_{i,p}(u) \, = \, p \left(\frac{N^{(k-1)}_{i, \, p-1}}{u_{i+p}-u_{i}} - \frac{N^{(k-1)}_{i+1, \, p-1}}{u_{i+p+1}-u_{i+1}}\right) \begin{matrix} \\.\\ \end{matrix}\)
+                        </li>
+                        <li>Compute the derivatives of the B-spline surface in $u$- and $v$-directions using homogenized coordinates $P_{i, j} = (x, y, z, w)$:
+                            \(D^{(k,l)} \, = \, \frac{\partial ^{k+l}}{\partial ^{k}u\, \partial ^{l}v} \, S(u,v) \, = \, \sum_{\, i=0}^{\, n} \sum_{\, j=0}^{\, m} N^{(k)}_{i,p}(u) \, N^{(l)}_{j,q}(v) \, P_{i,j}.\)
+                        </li>
+                        <li>Finally, let $A^{(k,l)} = D^{(k,l)}.xyz \,\,$ and $\,\, w^{(i,j)} = D^{(i,j)}.w$.</li>
+                    </ol>
+
+                    Once we have the coordinates of each surface point and the normals, we render the surface using the subdivison surface method with the number of subdivisions set to $50$ for a smooth look.
+                </p>
+
+                <h4> Visualize Music Scores with Curves</h4>
+                <p>
+                    After we successfully implemented NURBS and built the editing tool, we put it to use by drawing a music score using the curves. Specifically, users could input a file that contains a series of music notes such as "G5," and the GUI will automatically output the music score on the screen. <br><br>
+                    To achieve this, we first built and saved the music note shape using our NURBS curve editor, and then assigned different notes to different positions / orientations of the music note shape.
+                </p>
+            </p>
+
+            <h2>Results</h2>
+            <p class="project-description">
+                <h4>GUI for Curve Editing</h4>
+                <p>
+                    Our user interface for curve editing includes the following functionalities:
+                    <ul>
+                        <li>Select any control point, and edit its location or weight;</li>
+                        <li>Add / remove control point(s), and appropriately recalculate the knot vector;</li>
+                        <li>Take in a circle's center coordinates and radius as input, automatically generate the corresponding NURBS control points, and draw the circle.</li>
+                    </ul>
+                </p>
+
+                <h4>GUI for Surface Editing</h4>
+                <p>
+                    Our GUI for surface editing can also select any control point and edit its location or weight. \href{https://youtu.be/k4ok29qpqfE}{\textcolor{blue}{\emph{\underline{This video}}}} is a demo of the surface-editing functionalities (live-captured).
+                </p>
+
+                <h4>Music Scores Visualized with NURBS Curves</h4>
+                <p>
+
+                </p>
+            </p>
+        </section>
+    </main>
+
+    <div class="menu">
+        <a href="../">
+            <div class="control control-1" data-id="about">
+                <i class="fa-regular fa-address-card"></i>
+            </div>
+        </a>
+        <a href="../pages/research">
+            <div class="control control-2" data-id="research">
+                <i class="fa-solid fa-scroll"></i>
+            </div>
+        </a>
+        <a href="../pages/projects">
+            <div class="control control-3 active-btn" data-id="projects">
+                <i class="fa-solid fa-laptop"></i>
+            </div>
+        </a>
+    </div>
+
+    <div class="theme-btn">
+        <i class="fa-solid fa-circle-half-stroke"></i>
+    </div>
+
+    <script src="../app.js"></script>
+</body>
+</html>
