@@ -342,6 +342,13 @@ section{
 
 h2{
     margin-top: 2rem;
+    margin-bottom: -2rem;
+}
+
+h4{
+    u{
+        text-decoration-color: var(--color-lightblue);
+    }
 }
 
 /* Independent components */
