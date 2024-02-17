@@ -329,14 +329,15 @@ section{
     padding: 2rem 0;
     text-align: left;
     line-height: 1.8rem;
-    u{
-        text-decoration-color: var(--color-lightblue);
-    }
+}
+
+.ref{
+    color: var(--color-lightblue);
 }
 
 .project-img{
     display: block;
-    width: 800px;
+    width: 700px;
     margin: 2rem auto;
 }
 
@@ -345,10 +346,13 @@ h2{
     margin-bottom: -2rem;
 }
 
-h4{
-    u{
-        text-decoration-color: var(--color-lightblue);
-    }
+u{
+    text-decoration-color: var(--color-lightblue);
+}
+
+ol{
+    display: list-item;
+    list-style-position: inside;
 }
 
 /* Independent components */

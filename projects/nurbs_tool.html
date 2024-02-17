@@ -31,13 +31,13 @@
                 NURBS is widely used in real-world applications such as modeling, and our editing tool allows users to conveniently render curves or surfaces they want with NURBS.
             </p>
 
-            <iframe class="project-img" width="560" height="400" src="https://www.youtube.com/embed/8CIBrUmqSFM?si=xee1RNlL7yp8BDez" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe class="project-img" id="video-top" width="560" height="400" src="https://www.youtube.com/embed/8CIBrUmqSFM?si=xee1RNlL7yp8BDez" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <br>
 
             <h2>Motivation</h2> <br>
             <p class="project-description">
                 We chose to work with NURBS because of its wide applicability, from both the theoretical and practical aspects. <br><br>
-                On the theoretical side, NURBS provides a mathematical basis for representing both analytic shapes and free-form entities [5].
+                On the theoretical side, NURBS provides a mathematical basis for representing both analytic shapes and free-form entities <a class="ref" href="#ref5">[5]</a>.
                 Moreover, the local-control feature of NURBS makes it geometrically intuitive to design with NURBS (adding / removing a control point only changes the local shape), enabling local editing of the curve shape.
                 NURBS curves and surfaces are invariant under common transformations. Lastly, in terms of performance, NURBS algorithms are fast and numerically stable. <br><br>
                 On the practical side, NURBS is very popular for CAD, visualizations, industry modeling, etc.
@@ -45,12 +45,12 @@
 
             <h2>Background</h2> <br>
             <p class="project-description">
-                The framework of this project was built on top of an assignment on Bezier & B-splines.
+                The framework of this project was built on top of a previous assignment on Bezier & B-splines.
                 NURBS is a generalization of Bezier and B-splines, as it weights control points and has rational curves.
                 In particular, it has the extra parameters of weights and non-uniform knots, which are not present in default Bezier or B-splines. <br><br>
-                Most of our computations and algorithms are based on <em>The NURBS Book</em> by Piegl and Tiller [5], which covers this topic in extensive details.
-                In addition, since one special aspect of NURBS is that it can draw a perfect circle as well as sphere (whereas non-rational Bezier can only give approximations), we referred to "Representing a Circle or a Sphere with NURBS" by Eberly [1] for building our procedural code to draw a sphere. <br><br>
-                To double-check that our curves and surfaces are correct, we used an online NURBS calculator [4].
+                Most of our computations and algorithms are based on <em>The NURBS Book</em> by Piegl and Tiller <a class="ref" href="#ref5">[5]</a>, which covers this topic in extensive details.
+                In addition, since one special aspect of NURBS is that it can draw a perfect circle as well as sphere (whereas non-rational Bezier can only give approximations), we referred to "Representing a Circle or a Sphere with NURBS" by Eberly <a class="ref" href="#ref1">[1]</a> for building our procedural code to draw a sphere. <br><br>
+                To double-check that our curves and surfaces are correct, we used an online NURBS calculator <a class="ref" href="#ref4">[4]</a>.
             </p>
 
             <h2>Approach</h2> <br>
@@ -59,30 +59,30 @@
 
                 <h4><b><u>NURBS Curve</u></b></h4> <br>
                 <p>
-                    A <em>p</em>th degree NURBS curve is defined as [5]: <br><br>
-                    <center>\(C(u) \, = \, \frac{\sum_{\, i=0}^{\, n} \, N_{i,p}(u) \cdot w_{i} \cdot P_{i}}{\sum_{\, i=0}^{\, n} \, N_{i,p}(u) \cdot w_{i}} \, \begin{matrix} \\,\\ \end{matrix} \hspace{1cm} a \leq u \leq b,\)</center> <br>
+                    A <em>p</em>th degree NURBS curve is defined as <a class="ref" href="#ref5">[5]</a>: <br><br>
+                    <center>\(C(u) \, = \, \frac{\sum_{\, i=0}^{\, n} \, N_{i,p}(u) \, \cdot \, w_{i} \, \cdot \, P_{i}}{\sum_{\, i=0}^{\, n} \, N_{i,p}(u) \, \cdot \, w_{i}} \, \begin{matrix} \\,\\ \end{matrix} \hspace{1cm} a \leq u \leq b,\)</center> <br>
                     where \(\{P_{i}\}\) are control points, \(\{w_{i}\}\) are weights, \(\{N_{i,p}(u)\}\) are the \(p\)th degree B-spline basis functions defined on the non-periodic and non-uniform knot vector (clamped endpoints here): <br><br>
                     <center>\(U \, = \, \{a, \, \cdots, \, a, \, u_{p+1}, \, \cdots, \, u_{m-p-1}, \, b, \, \cdots, \, b\}, \hspace{1cm} \text{where } a = 0, \, b = 1.\)</center> <br><br>
                     To calculate the B-spline basis function \(N_{i,p}(u)\) given any knot vector \(U\) and degree, we used a dynamic programming tabular method derived from the Cox-deBoor recurrence formula: <br><br>
                     <center>\(N_{i, 0}(u) \, = \begin{cases} 1 & \text{if } u_{i} \leq u < u_{i+1} \\ 0 & \text{otherwise} \end{cases}\)</center> <br>
-                    <center>\(N_{i, p}(u) \, = \, \frac{u - u_{i}}{u_{i+p} - u_{i}} \, N_{i, \, p-1}(u) \, + \, \frac{u_{i+p+1} - u}{u_{i+p+1} - u_{i+1}} \, N_{i+1, \, p-1}(u).\)</center> <br><br><br>
+                    <center>\(N_{i, p}(u) \, = \, \frac{u \, - \, u_{i}}{u_{i+p} \, - \, u_{i}} \,\, N_{i, \, p-1}(u) \, + \, \frac{u_{i+p+1} \, - \, u}{u_{i+p+1} \, - \, u_{i+1}} \,\, N_{i+1, \, p-1}(u).\)</center> <br><br><br>
                 </p>
 
                 <h4><b><u>NURBS Surface</u></b></h4> <br>
                 <p>
-                    A NURBS surface is defined by a control points net, which form NURBS curves in \(u\)- and \(v\)-directions. A NURBS surface of degree \(p\) in \(u\)-direction and degree \(q\) in \(v\)-direction is defined as [5]: <br><br>
+                    A NURBS surface is defined by a control points net, which form NURBS curves in \(u\)- and \(v\)-directions. A NURBS surface of degree \(p\) in \(u\)-direction and degree \(q\) in \(v\)-direction is defined as <a class="ref" href="#ref5">[5]</a>: <br><br>
                     <center>\(S(u, v) \, = \, \frac{\sum_{\, i=0}^{\, n} \sum_{\, j=0}^{\, m} \, N_{i,p}(u) \, \cdot \, N_{j,q}(v) \, \cdot \, w_{i,j} \, \cdot \, P_{i,j}}{\sum_{\, i=0}^{\, n} \sum_{\, j=0}^{\, m} \, N_{i,p}(u) \, \cdot \, N_{j,q}(v) \, \cdot \, w_{i,j}} \, \begin{matrix} \\,\\ \end{matrix} \hspace{1cm} 0 \, \leq \, u, \, v \, \leq \, 1,\)</center> <br>
-                    where the notations are similar to those in Equation (1), except that the surface is in \(uv\)-coordinates. <br><br>
+                    where the notations are similar to those in the curve's equation, except that the surface is in \(uv\)-coordinates. <br><br>
                     The surface points were able to be implemented by building on top of our curve implementation. However, we also needed to calculate the surface normals for shading. At a high level, the surface normals are the normalized cross product of the partial derivatives with respect to \(u\) and \(v\): <br><br>
-                    <center>\(\frac{\frac{\partial S(u,v)}{\partial u} \times \frac{\partial S(u,v)}{\partial v}}{|\frac{\partial S(u,v)}{\partial u} \times \frac{\partial S(u,v)}{\partial v} |}  \, = \, \frac{(S^{(1,0)} \times S^{(0,1)})}{|(S^{(1,0)} \times S^{(0,1)})|} \, \begin{matrix} \\,\\ \end{matrix}\)</center> <br>
+                    <center>\(\frac{\frac{\partial S(u,v)}{\partial u} \, \times \, \frac{\partial S(u,v)}{\partial v}}{|\frac{\partial S(u,v)}{\partial u} \, \times \, \frac{\partial S(u,v)}{\partial v} |}  \, = \, \frac{(S^{(1,0)} \, \times \, S^{(0,1)})}{|(S^{(1,0)} \, \times \, S^{(0,1)})|} \, \begin{matrix} \\,\\ \end{matrix}\)</center> <br>
                     where \(S^{(k,l)}(u,v)\) is the (\(k\)th, \(l\)th) partial derivative of a NURBS surface at point \(S(u, v)\) with respect to the variables \((u, v)\), which can be derived using the Leibniz rule (the product rule for finding higher order derivatives): <br><br>
                     <center>\(S^{(k,l)} \, = \, \frac{1}{w^{(0,0)}} \, (A^{(k,l)} \, - \, \sum_{\, i=1}^{\,k} \binom{k}{i} \, w^{(i,0)} \, S^{(k-i, \, l)} - \sum_{\, j=1}^{\,l} \binom{l}{j} \, w^{(0,j)} \, S^{(k, \, l-j)} \, - \, \sum_{\, i=1}^{\,k} \binom{k}{i} \sum_{\, j=1}^{\,l} \binom{l}{j} \, w^{(i,j)} \, S^{(k-i, \, l-j)}) \, ,\)</center> <br>
-                    where $A^{(k,l)}$ and $w^{(i,j)}$ are found through the following steps: <br><br>
+                    where \(A^{(k,l)}\) and \(w^{(i,j)}\) are found through the following steps: <br><br>
                     
                     <div style="margin-left: 25px;">
                         1. Find the correct knot vector span index \(i\) that encompasses \(u\) in knot vector \(U\) using binary search. Do the same for \(v\) in knot vector \(V\). <br><br>
                         2. Compute the derivatives of the degree \(p\) (\(p = p\) for \(u\)-direction, \(p = q\) for \(v\)-direction) B-spline basis functions: <br><br>
-                            <center>\(N^{(k)}_{i,p}(u) \, = \, p \left(\frac{N^{(k-1)}_{i, \, p-1}}{u_{i+p}-u_{i}} - \frac{N^{(k-1)}_{i+1, \, p-1}}{u_{i+p+1}-u_{i+1}}\right) \begin{matrix} \\.\\ \end{matrix}\)</center> <br>
+                            <center>\(N^{(k)}_{i,p}(u) \, = \, p \left(\frac{N^{(k-1)}_{i, \, p-1}}{u_{i+p} \, - \, u_{i}} - \frac{N^{(k-1)}_{i+1, \, p-1}}{u_{i+p+1} \, - \, u_{i+1}}\right) \begin{matrix} \\.\\ \end{matrix}\)</center> <br>
                         3. Compute the derivatives of the B-spline surface in \(u\)- and \(v\)-directions using homogenized coordinates \(P_{i, j} = (x, y, z, w)\): <br><br>
                             <center>\(D^{(k,l)} \, = \, \frac{\partial ^{k+l}}{\partial ^{k}u\, \partial ^{l}v} \, S(u,v) \, = \, \sum_{\, i=0}^{\, n} \sum_{\, j=0}^{\, m} N^{(k)}_{i,p}(u) \, N^{(l)}_{j,q}(v) \, P_{i,j}.\)</center> <br>
                         4. Finally, let \(A^{(k,l)} = D^{(k,l)}.xyz \,\,\) and \(\,\, w^{(i,j)} = D^{(i,j)}.w\). <br><br>
@@ -103,7 +103,7 @@
             <p class="project-description">
                 <h4><b><u>GUI for Curve Editing</u></b></h4> <br>
                 <p>
-                    Our user interface for curve editing includes the following functionalities (as shown in the video at the beginning): <br><br>
+                    Our user interface for curve editing includes the following functionalities (as shown in the <a href="#video-top"><u>video</u></a> at the beginning): <br><br>
                     <div style="margin-left: 25px;">
                         1. Select any control point, and edit its location or weight; <br><br>
                         2. Add / remove control point(s), and appropriately recalculate the knot vector; <br><br>
@@ -114,7 +114,7 @@
                 <h4><b><u>GUI for Surface Editing</u></b></h4> <br>
                 <p>
                     Our GUI for surface editing can also select any control point and edit its location or weight.
-                    <iframe class="project-img" width="560" height="400" src="https://www.youtube.com/embed/k4ok29qpqfE?si=m_QW02o9k2hLW58s"" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe class="project-img" width="560" height="400" src="https://www.youtube.com/embed/k4ok29qpqfE?si=m_QW02o9k2hLW58s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     <br>
                 </p>
 
@@ -127,6 +127,36 @@
                     Our GUI then outputs the following music score onto the screen:
                     <img src="../images/music_score.jpg" alt="" class="project-img"> <br>
                 </p>
+            </p>
+
+            <h2>Conclusion</h2>
+            <p class="project-description">
+                <h4><b><u>Summary</u></b></h4> <br>
+                <p>
+                    We built a NURBS curve and surface editing tool, as well as an extension to a sheet music visualizer. <br><br>
+                    The curve-editing GUI enables users to conveniently edit the look of any NURBS curve and save control point information for later. In addition, the user could also add perfect circles to the scene, with custom center poosition and radius. <br><br>
+                    For the surface-editing tool, users could move and re-weight control points. The challenging part here during implementation was calculating the surface normals. <br><br>
+                    Lastly, we applied the tool to visualize input music scores with NURBS curves. <br><br><br>
+                </p>
+
+                <h4><b><u>Future Extensions</u></b></h4> <br>
+                <p>
+                    There are two potential directions we want to further explore: <br><br>
+                    <div style="margin-left: 25px;">
+                        1. Implement curve / surface interpolation to given point data, i.e. find the control point locations and weights such that the resulting curve goes through the point data. <br><br>
+                        2. Since NURBS is the industry standard for modeling and it's fast as well as numerically stable, we want to explore efficient rendering of large-scale NURBS models. We want to replicate the 2023 SIGGRAPH paper by Xiong et al. <a class="ref" href="#ref6">[6]</a>, which uses an elastic tessellation framework for NURBS rendering. <br><br><br>
+                    </div>
+                </p>
+            </p>
+
+            <h2>References</h2>
+            <p class="project-description">
+                <div id="ref1">[1] Eberly, D. (n.d.). <i>Representing a Circle or a Sphere with NURBS</i>. </div><br>
+                <div id="ref2">[2] Haugland, K. (2016, April 24). <a href="https://www.codeproject.com/Articles/1095142/Generate-and-understand-NURBS-curves" target="blank"><i>Generate and understand NURBS curves</i>. CodeProject.</a> </div><br>
+                <div id="ref3">[3] <a href="https://en.wikipedia.org/w/index.php?title=Non-uniform_rational_B-spline&oldid=1189177837#Example:_a_circle" target="blank">Non-uniform rational B-spline (2023). In <i>Wikipedia</i>.</a> </div><br>
+                <div id="ref4">[4] <a href="https://nurbscalculator.in/" target="blank"><i>NURBS demo — WebGL based online evaluator for NURBS Curves</i> (n.d.).</a> </div><br>
+                <div id="ref5">[5] Piegl, L., & Tiller, W. (1995). <a href="https://doi.org/10.1007/978-3-642-97385-7" target="blank"><i>The NURBS Book</i>. Springer.</a> </div><br>
+                <div id="ref6">[6] Xiong, R., Lu, Y., Chen, C., Zhu, J., Zeng, Y., & Liu, L. (2023). <a href="https://doi.org/10.1145/3592419" target="blank">ETER: Elastic Tessellation for Real-Time Pixel-Accurate Rendering of Large-Scale NURBS Models. <i>ACM Transactions on Graphics</i>, 42(4), 133:1-133:13.</a> </div>
             </p>
         </section>
     </main>
